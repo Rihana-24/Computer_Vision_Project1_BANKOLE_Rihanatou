@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>MammoScan AI</title>
     <style>
         body {
-            background-image: url("/static/background.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -14,7 +13,7 @@
             color: white;
             text-align: center;
             padding-top: 50px;
-            transition: background-image 0.1s ease-in-out; /* Fast background switch */
+            transition: background-image 0.4s ease-in-out;
         }
 
         form {
@@ -95,16 +94,18 @@
     </style>
     <script>
         const backgrounds = [
-            "/static/background.jpg",
-            "/static/image_background2.jpg",
-            "/static/image_background3.jpg",
-            "/static/image_background4.jpg",
-            "/static/image_background5.jpg",
-            "/static/image_background6.jpg",
-            "/static/image_background7.jpg",
-            "/static/image_background8.jpg",
+            "/static/download (7).jpg",
+            "/static/download (8).jpg",
+            "/static/Human-brain-with-tumor-3D-illustration.jpg",
             "/static/image_background9.jpg",
-            "/static/image_background10.jpg"
+            "/static/image_background10.jpg",
+            "/static/images (7).jpg",
+            "/static/images (8).jpg",
+            "/static/images (9).jpg",
+            "/static/images (10).jpg",
+            "/static/images (11).jpg",
+            "/static/images (12).jpg",
+            "/static/images (13).jpg"
         ];
 
         let bgIndex = 0;
@@ -114,51 +115,38 @@
             bgIndex = (bgIndex + 1) % backgrounds.length;
         }
 
-        setInterval(changeBackground, 3000); // Change every 3 seconds
+        changeBackground(); // Load first image
+        setInterval(changeBackground, 4000); // Rotate every 4 seconds
     </script>
 </head>
 <body>
     <h1>MammoScan AI</h1>
-    <p><em>Welcome! MammoScan AI helps detect and classify breast and brain tumors using AI-powered image analysis.</em></p>
+    <p><em>AI-powered MRI brain tumor classification using CNN (TensorFlow / PyTorch)</em></p>
 
     <div class="info-box">
-        <h2>Understanding Breast Cancer</h2>
-        <p><strong>Breast Cancer</strong> is a malignant tumor that starts in the cells of the breast. It can spread to other parts of the body if not detected and treated early.</p>
-
-        <h3>Key Medical Concepts</h3>
+        <h2>Understanding Brain Tumors</h2>
+        <p>This application detects brain tumors from MRI images, distinguishing between:</p>
         <ul>
-            <li><strong>Breast Cancer States</strong>: Stages 0 to IV describe the extent of cancer spread.</li>
-            <li><strong>Glioma</strong>: A tumor from glial cells in the brain or spinal cord; may be aggressive (e.g., glioblastoma).</li>
-            <li><strong>Meningioma</strong>: Usually benign tumors arising from the meninges; may cause headaches or neurological symptoms.</li>
-            <li><strong>No Tumor</strong>: Indicates a healthy brain scan with no tumor present.</li>
-            <li><strong>Pituitary Tumor</strong>: Tumor in the pituitary gland; can affect hormone balance and vision.</li>
+            <li><strong>Glioma</strong> – originates from glial cells</li>
+            <li><strong>Meningioma</strong> – from meninges, mostly benign</li>
+            <li><strong>Pituitary Tumor</strong> – affects hormone regulation</li>
+            <li><strong>No Tumor</strong> – healthy scan</li>
         </ul>
 
-        <h3>Prevention Tips for Breast Cancer</h3>
+        <h3>Tips for Brain Health</h3>
         <ul>
-            <li>Get regular screenings (e.g., mammograms).</li>
-            <li>Exercise and maintain a healthy weight.</li>
-            <li>Limit alcohol and quit smoking.</li>
-            <li>Understand your family medical history.</li>
-            <li>Be alert to symptoms like lumps or changes in breast shape.</li>
-        </ul>
-
-        <h3>Tips to Reduce Risk of These Conditions</h3>
-        <ul>
-            <li>Avoid unnecessary radiation exposure (e.g., repeated CT scans).</li>
-            <li>Use protective gear when exposed to toxic chemicals.</li>
-            <li>Manage hormonal balance responsibly.</li>
-            <li>Adopt a brain-healthy lifestyle: sleep well, reduce stress, stay mentally active.</li>
-            <li>Eat a diet rich in antioxidants: fruits, vegetables, whole grains.</li>
-            <li>Minimize exposure to radiation from mobile devices — use headphones.</li>
+            <li>Avoid unnecessary radiation exposure</li>
+            <li>Stay mentally active and reduce stress</li>
+            <li>Exercise and eat a diet rich in antioxidants</li>
+            <li>Monitor for persistent symptoms like headaches, vision changes, or seizures</li>
         </ul>
     </div>
 
     <form method="post" enctype="multipart/form-data">
         <label>Select framework:</label><br>
-        <input type="radio" name="framework" value="tensorflow" checked> 
+        <input type="radio" name="framework" value="tensorflow" checked>
         <span style="color:#81d4fa;">TensorFlow</span>
-        <input type="radio" name="framework" value="pytorch"> 
+        <input type="radio" name="framework" value="pytorch">
         <span style="color:#ffcc80;">PyTorch</span><br><br>
 
         <input type="file" name="file"><br><br>
