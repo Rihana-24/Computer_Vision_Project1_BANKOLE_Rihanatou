@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MammoScan AI</title>
+    <style>
+        body {
+            background-image: url("/static/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+            transition: background-image 0.1s ease-in-out; /* Fast background switch */
+        }
+
+        form {
+            background-color: rgba(0, 51, 102, 0.85);
+            padding: 30px;
+            display: inline-block;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        h1, h2 {
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #a8e6cf;
+        }
+
+        input[type="radio"] {
+            margin: 10px;
+            accent-color: #40e0d0;
+            transform: scale(1.2);
+        }
+
+        input[type="file"] {
+            margin-top: 15px;
+            padding: 6px;
+            background-color: #e0f7fa;
+            border-radius: 5px;
+            border: none;
+            color: #003366;
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #66bb6a;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #43a047;
+        }
+
+        img {
+            margin-top: 20px;
+            border: 4px solid #00bcd4;
+            border-radius: 10px;
+        }
+
+        .info-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #003366;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+
+        .info-box h2, .info-box h3 {
+            color: #004d99;
+        }
+
+        .info-box ul {
+            padding-left: 20px;
+        }
+    </style>
+    <script>
+        const backgrounds = [
+            "/static/background.jpg",
+            "/static/image_background2.jpg",
+            "/static/image_background3.jpg",
+            "/static/image_background4.jpg",
+            "/static/image_background5.jpg",
+            "/static/image_background6.jpg",
+            "/static/image_background7.jpg",
+            "/static/image_background8.jpg",
+            "/static/image_background9.jpg",
+            "/static/image_background10.jpg"
+        ];
+
+        let bgIndex = 0;
+
+        function changeBackground() {
+            document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+            bgIndex = (bgIndex + 1) % backgrounds.length;
+        }
+
+        setInterval(changeBackground, 3000); // Change every 3 seconds
+    </script>
+</head>
+<body>
+    <h1>MammoScan AI</h1>
+    <p><em>Welcome! MammoScan AI helps detect and classify breast and brain tumors using AI-powered image analysis.</em></p>
+
+    <div class="info-box">
+        <h2>Understanding Breast Cancer</h2>
+        <p><strong>Breast Cancer</strong> is a malignant tumor that starts in the cells of the breast. It can spread to other parts of the body if not detected and treated early.</p>
+
+        <h3>Key Medical Concepts</h3>
+        <ul>
+            <li><strong>Breast Cancer States</strong>: Stages 0 to IV describe the extent of cancer spread.</li>
+            <li><strong>Glioma</strong>: A tumor from glial cells in the brain or spinal cord; may be aggressive (e.g., glioblastoma).</li>
+            <li><strong>Meningioma</strong>: Usually benign tumors arising from the meninges; may cause headaches or neurological symptoms.</li>
+            <li><strong>No Tumor</strong>: Indicates a healthy brain scan with no tumor present.</li>
+            <li><strong>Pituitary Tumor</strong>: Tumor in the pituitary gland; can affect hormone balance and vision.</li>
+        </ul>
+
+        <h3>Prevention Tips for Breast Cancer</h3>
+        <ul>
+            <li>Get regular screenings (e.g., mammograms).</li>
+            <li>Exercise and maintain a healthy weight.</li>
+            <li>Limit alcohol and quit smoking.</li>
+            <li>Understand your family medical history.</li>
+            <li>Be alert to symptoms like lumps or changes in breast shape.</li>
+        </ul>
+
+        <h3>Tips to Reduce Risk of These Conditions</h3>
+        <ul>
+            <li>Avoid unnecessary radiation exposure (e.g., repeated CT scans).</li>
+            <li>Use protective gear when exposed to toxic chemicals.</li>
+            <li>Manage hormonal balance responsibly.</li>
+            <li>Adopt a brain-healthy lifestyle: sleep well, reduce stress, stay mentally active.</li>
+            <li>Eat a diet rich in antioxidants: fruits, vegetables, whole grains.</li>
+            <li>Minimize exposure to radiation from mobile devices — use headphones.</li>
+        </ul>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+        <label>Select framework:</label><br>
+        <input type="radio" name="framework" value="tensorflow" checked> 
+        <span style="color:#81d4fa;">TensorFlow</span>
+        <input type="radio" name="framework" value="pytorch"> 
+        <span style="color:#ffcc80;">PyTorch</span><br><br>
+
+        <input type="file" name="file"><br><br>
+        <input type="submit" value="Upload and Predict">
+    </form>
+
+    {% if prediction %}
+        <h2>{{ prediction }}</h2>
+        {% if image_url %}
+            <img src="{{ image_url }}" alt="Uploaded Image" width="300">
+        {% endif %}
+    {% endif %}
+</body>
+</html>
