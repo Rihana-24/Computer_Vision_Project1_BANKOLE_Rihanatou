@@ -1,8 +1,8 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MammoScan AI</title>
+    <title>BrainScan AI</title>
     <style>
         body {
             background-size: cover;
@@ -13,7 +13,7 @@
             color: white;
             text-align: center;
             padding-top: 50px;
-            transition: background-image 0.4s ease-in-out;
+            transition: background-image 1s ease-in-out;
         }
 
         form {
@@ -92,35 +92,10 @@
             padding-left: 20px;
         }
     </style>
-    <script>
-        const backgrounds = [
-            "/static/download (7).jpg",
-            "/static/download (8).jpg",
-            "/static/Human-brain-with-tumor-3D-illustration.jpg",
-            "/static/image_background10.jpg",
-            "/static/images (7).jpg",
-            "/static/images (8).jpg",
-            "/static/images (9).jpg",
-            "/static/images (10).jpg",
-            "/static/images (11).jpg",
-            "/static/images (12).jpg",
-            "/static/images (13).jpg"
-        ];
-
-        let bgIndex = 0;
-
-        function changeBackground() {
-            document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
-            bgIndex = (bgIndex + 1) % backgrounds.length;
-        }
-
-        changeBackground(); // Load first image
-        setInterval(changeBackground, 4000); // Rotate every 4 seconds
-    </script>
 </head>
 <body>
-    <h1>MammoScan AI</h1>
-    <p><em>AI-powered MRI brain tumor classification using CNN (TensorFlow / PyTorch)</em></p>
+    <h1>BrainScan AI</h1>
+    <p><em>Welcome! BrainScan AI helps detect and classify breast and brain tumors using AI-powered image analysis.</em></p>
 
     <div class="info-box">
         <h2>Understanding Brain Tumors</h2>
@@ -141,6 +116,7 @@
         </ul>
     </div>
 
+    <!-- ✅ FORM — this part allows prediction -->
     <form method="post" enctype="multipart/form-data">
         <label>Select framework:</label><br>
         <input type="radio" name="framework" value="tensorflow" checked>
@@ -148,15 +124,51 @@
         <input type="radio" name="framework" value="pytorch">
         <span style="color:#ffcc80;">PyTorch</span><br><br>
 
-        <input type="file" name="file"><br><br>
+        <input type="file" name="file" required><br><br>
         <input type="submit" value="Upload and Predict">
     </form>
 
+    <!-- ✅ Prediction output -->
     {% if prediction %}
         <h2>{{ prediction }}</h2>
         {% if image_url %}
             <img src="{{ image_url }}" alt="Uploaded Image" width="300">
         {% endif %}
     {% endif %}
+
+    <!-- ✅ JavaScript placed at the end for full DOM access -->
+    <script>
+        const backgrounds = [
+            "/static/download (7).jpg",
+            "/static/download (8).jpg",
+            "/static/Human-brain-with-tumor-3D-illustration.jpg",
+            "/static/image_background10.jpg",
+            "/static/images (7).jpg",
+            "/static/images (8).jpg",
+            "/static/images (9).jpg",
+            "/static/images (10).jpg",
+            "/static/images (11).jpg",
+            "/static/images (12).jpg",
+            "/static/images (13).jpg"
+        ];
+
+        let bgIndex = 0;
+
+        // Optional: preload images to avoid flickering
+        backgrounds.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        function changeBackground() {
+            document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+            bgIndex = (bgIndex + 1) % backgrounds.length;
+        }
+
+        window.onload = () => {
+            changeBackground(); // Set first background
+            setInterval(changeBackground, 4000); // Then rotate every 4s
+        };
+    </script>
 </body>
 </html>
